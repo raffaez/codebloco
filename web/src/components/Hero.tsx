@@ -31,23 +31,23 @@ function Hero() {
         );
 
   return (
-    <div className="w-screen h-[532px] bg-gray-100 relative flex flex-col items-center justify-center space-y-10">
+    <div className="w-full overflow-x-hidden h-full lg:h-[532px] bg-gray-100 relative flex flex-col items-center justify-center space-y-reverse space-y-10">
       <div className="w-64 h-64 lg:w-[407px] lg:h-´345px] absolute top-0 left-0 bg-top-ilustra bg-no-repeat bg-contain bg-left-top z-0"></div>
-      <div className="w-64 h-64 lg:w-[414px] lg:h-[330px] absolute bottom-0 right-0 bg-bottom-ilustra bg-no-repeat bg-contain bg-right-bottom z-0"></div>
+      <div className="w-64 h-64 lg:w-[414px] md:h-[330px] absolute bottom-0 right-0 bg-bottom-ilustra bg-no-repeat bg-contain bg-right-bottom z-0"></div>
 
       <div className="flex flex-col items-center mx-2 space-y-5 z-20">
         <div className="uppercase text-red-500 md:text-lg">Find your block</div>
-        <strong className="text-center text-3xl md:text-5xl font-bold md:whitespace-pre-line drop-shadow-lg">
+        <strong className="text-center text-3xl md:text-5xl font-bold md:whitespace-pre-line drop-shadow-md">
           Encontre os <span className="text-purple-500">melhores blocos</span>
           {"\n"}
           de carnaval de 2023
         </strong>
       </div>
 
-      <div className="w-[993px] h-32 rounded-md bg-white drop-shadow-sm z-20 flex justify-center">
+      <div className="w-80 md:w-96 lg:w-[993px] h-fit rounded-md bg-white drop-shadow-sm z-20 flex justify-center">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex h-full flex-row space-x-5 p-5 items-center">
-            <div className="w-[348px] h-12 flex items-center justify-start space-x-2 px-2 rounded-md bg-gray-100 hover:bg-gray-200/60 transition duration-200 ease-in-out text-black-500">
+          <div className="flex h-full flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-5 p-5 items-center">
+            <div className="w-72 md:w-[348px] h-12 flex items-center justify-start space-x-2 px-2 rounded-md bg-gray-100 hover:bg-gray-200/60 transition duration-200 ease-in-out text-black-500">
               <div>
                 <MagnifyingGlassIcon className="w-5 h-5 text-red-500" />
               </div>
@@ -60,7 +60,7 @@ function Hero() {
               />
             </div>
 
-            <div className="w-[348px] h-12 flex items-center rounded-md bg-gray-100 hover:bg-gray-200/60 transition duration-200 ease-in-out">
+            <div className="w-72 md:w-[348px] h-12 flex items-center rounded-md bg-gray-100 hover:bg-gray-200/60 transition duration-200 ease-in-out">
               <Combobox
                 as="span"
                 {...register("cidade")}
@@ -90,7 +90,7 @@ function Hero() {
                   afterLeave={() => setQuery("")}
                   className="absolute mt-3 w-full"
                 >
-                  <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-gray-100 py-1 text-base shadow-lg sm:text-sm">
+                  <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-gray-100 py-1 shadow-lg text-sm md:text-base">
                     {cidadesFiltradas.length === 0 && query !== "" ? (
                       <div className="relative select-none cursor-default px-2 text-base text-gray-700 w-full bg-inherit">
                         Nenhuma cidade encontrada
@@ -139,7 +139,7 @@ function Hero() {
             <input
               type="submit"
               value="Buscar agora"
-              className="bg-purple-500 hover:bg-purple-500/90 active:brightness-25 px-8 py-3 rounded-md cursor-pointer text-white uppercase text-sm font-semibold tracking-wider transition duration-200 ease-in-out"
+              className="w-72 md:w-[348px] lg:w-auto bg-purple-500 hover:bg-purple-500/90 active:brightness-25 px-8 py-3 rounded-md cursor-pointer text-white uppercase text-sm font-semibold tracking-wider transition duration-200 ease-in-out"
             />
           </div>
         </form>
