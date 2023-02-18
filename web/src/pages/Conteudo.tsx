@@ -33,7 +33,34 @@ function Conteudo() {
       setBlocosFiltrados(undefined);
     }
 
-    if (nomeBloco !== "") {
+    if (nomeBloco !== "" && cidade !== "") {
+      tituloQuery = { ...tituloQuery, nomeBloco: nomeBloco, cidade: cidade };
+      if (blocosFiltrados !== undefined && blocosFiltrados.length > 0) {
+        setBlocosFiltrados(
+          blocosFiltrados.filter((bloco) => {
+            return (
+              bloco.nome
+                .toLowerCase()
+                .trim()
+                .includes(nomeBloco.toLowerCase().trim()) &&
+              bloco.cidade === cidade
+            );
+          })
+        );
+      } else {
+        setBlocosFiltrados(
+          blocos.filter((bloco) => {
+            return (
+              bloco.nome
+                .toLowerCase()
+                .trim()
+                .includes(nomeBloco.toLowerCase().trim()) &&
+              bloco.cidade === cidade
+            );
+          })
+        );
+      }
+    } else if (nomeBloco !== "") {
       tituloQuery = { ...tituloQuery, nomeBloco: nomeBloco };
       if (blocosFiltrados !== undefined && blocosFiltrados.length > 0) {
         setBlocosFiltrados(
@@ -54,9 +81,7 @@ function Conteudo() {
           })
         );
       }
-    }
-
-    if (cidade !== "") {
+    } else if (cidade !== "") {
       tituloQuery = { ...tituloQuery, cidade: cidade };
       if (blocosFiltrados && blocosFiltrados.length > 0) {
         setBlocosFiltrados(
