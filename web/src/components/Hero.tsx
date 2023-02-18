@@ -1,24 +1,36 @@
-import React, { Fragment, useState } from "react";
-import { useForm } from "react-hook-form";
-import { blocos } from "./blocosContent";
 import { Combobox, Transition } from "@headlessui/react";
 import {
-  ArrowDownIcon,
   CheckIcon,
   ChevronDownIcon,
-  ChevronUpDownIcon,
   MagnifyingGlassIcon,
   MapPinIcon,
 } from "@heroicons/react/20/solid";
+import { useFormik } from "formik";
+import React, { ChangeEvent, Fragment, useEffect, useState } from "react";
+
+import { useSearchStore } from "../store";
+import { blocos } from "./blocosContent";
 
 function Hero() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data: any) => console.log(data);
+  const formik = useFormik({
+    initialValues: {
+      cidade: "",
+      nomeBloco: "",
+    },
+    onSubmit: (values) => {
+      if (values.cidade !== "" || values.nomeBloco !== "") {
+        useSearchStore.setState({
+          cidade: values.cidade,
+          nomeBloco: values.nomeBloco,
+        });
+        window.location.href = "/#conteudo";
+        formik.handleReset({
+          cidade: "",
+          nomeBloco: "",
+        });
+      }
+    },
+  });
 
   const cidadesSet = new Set(blocos.map((bloco) => bloco.cidade));
   const cidades = Array.from(cidadesSet).sort();
@@ -26,9 +38,10 @@ function Hero() {
   const cidadesFiltradas =
     query === ""
       ? cidades
-      : cidades.filter((cidade) =>
-          cidade.toLowerCase().includes(query.toLowerCase().replace(/\s+/g, ""))
-        );
+      : cidades.filter((cidade) => {
+          const queryLower = query.toLowerCase();
+          return cidade.toLowerCase().includes(queryLower.trim());
+        });
 
   return (
     <div className="w-full overflow-x-hidden h-screen bg-gray-100 relative flex flex-col items-center justify-center space-y-10 space-y-reverse ">
@@ -48,7 +61,7 @@ function Hero() {
       </div>
 
       <div className="w-80 md:w-96 lg:w-[993px] h-fit lg:h-32 rounded-md bg-white drop-shadow-sm z-50 flex justify-center">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={formik.handleSubmit}>
           <div className="flex h-full flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-5 p-5 items-center">
             <div className="w-72 md:w-[348px] h-12 flex items-center justify-start space-x-2 px-2 rounded-md bg-gray-100 hover:bg-gray-200/60 transition duration-200 ease-in-out text-black-500">
               <div>
@@ -56,9 +69,10 @@ function Hero() {
               </div>
               <input
                 type="text"
-                defaultValue=""
+                name="nomeBloco"
+                value={formik.values.nomeBloco}
+                onChange={formik.handleChange}
                 placeholder="Pesquise por nome"
-                {...register("nomeBloco")}
                 className="bg-transparent focus:outline-none"
               />
             </div>
@@ -66,8 +80,11 @@ function Hero() {
             <div className="w-72 md:w-[348px] h-12 flex items-center rounded-md bg-gray-100 hover:bg-gray-200/60 transition duration-200 ease-in-out">
               <Combobox
                 as="span"
-                {...register("cidade")}
                 className="w-full relative"
+                onChange={(cidade: any) => {
+                  formik.setFieldValue("cidade", cidade);
+                }}
+                value={formik.values.cidade}
               >
                 <div className="flex flex-row justify-between px-2">
                   <div className="flex items-center space-x-2">
@@ -94,8 +111,9 @@ function Hero() {
                   className="absolute mt-3 w-full"
                 >
                   <Combobox.Options className="absolute mt-1 max-h-56 w-full overflow-auto rounded-md bg-gray-100 py-1 shadow-lg text-sm md:text-base">
+                    <Combobox.Option value=""></Combobox.Option>
                     {cidadesFiltradas.length === 0 && query !== "" ? (
-                      <div className="relative select-none cursor-default px-2 text-base text-gray-700 w-full bg-inherit">
+                      <div className="relative select-none cursor-default py-2 pl-10 pr-4 text-base text-gray-700 w-full bg-inherit">
                         Nenhuma cidade encontrada
                       </div>
                     ) : (
