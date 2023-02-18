@@ -5,7 +5,7 @@ import Conteudo from "./pages/Conteudo";
 
 function App() {
   return (
-    <div className="max-w-screen overflow-x-hidden">
+    <div className="max-w-screen overflow-x-hidden scroll-smooth">
       <div className="w-screen h-screen flex flex-col">
         <section id="hero" className="relative z-20">
           <Hero />
