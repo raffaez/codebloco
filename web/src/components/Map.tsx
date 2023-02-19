@@ -1,12 +1,11 @@
 import {
   GoogleMap,
   InfoWindowF,
-  LoadScript,
-  Marker,
   MarkerF,
   useLoadScript,
 } from "@react-google-maps/api";
 import React, { useState } from "react";
+
 import { Bloco } from "../models/Bloco";
 import Spinner from "./Spinner";
 
