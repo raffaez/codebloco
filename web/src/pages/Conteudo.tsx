@@ -6,13 +6,14 @@ import { Bloco } from "../models/Bloco";
 import { useBlocosStore, useSearchStore } from "../store/index";
 import NotFound from "../components/NotFound";
 import Map from "../components/Map";
+import Spinner from "../components/Spinner";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 function Conteudo() {
-  const { blocos } = useBlocosStore();
+  const { blocos, loading } = useBlocosStore();
   const cidade = useSearchStore((state) => state.cidade);
   const nomeBloco = useSearchStore((state) => state.nomeBloco);
 
@@ -56,15 +57,14 @@ function Conteudo() {
       );
     }
 
+    setNotFound(filteredBlocks.length === 0);
     if (filteredBlocks.length > 0) {
       setBlocosFiltrados(filteredBlocks);
     } else {
       setBlocosFiltrados([]);
     }
-
     getTitulo(nomeBloco, cidade);
-    setNotFound(filteredBlocks.length === 0);
-  }, [cidade, nomeBloco]);
+  }, [cidade, nomeBloco, loading]);
 
   useEffect(() => {
     if (blocosFiltrados.length > 0) {
@@ -137,13 +137,22 @@ function Conteudo() {
           </div>
         </div>
         <Tab.Panels>
-          {notFound ? (
+          {loading ? (
+            <Spinner />
+          ) : notFound ? (
             <NotFound button={button} />
           ) : (
             Object.values(views).map((conteudo, index) => (
               <Tab.Panel key={index}>{conteudo}</Tab.Panel>
             ))
           )}
+          {/* {notFound ? (
+            <NotFound button={button} />
+          ) : (
+            Object.values(views).map((conteudo, index) => (
+              <Tab.Panel key={index}>{conteudo}</Tab.Panel>
+            ))
+          )} */}
         </Tab.Panels>
       </Tab.Group>
     </div>
