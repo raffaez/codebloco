@@ -117,7 +117,7 @@ function Conteudo() {
         <div className="max-w-screen overflow-x-hidden relative flex flex-col space-y-reverse space-y-10 pt-16">
           <div className="flex flex-col md:flex-row justify-between items-center mx-3 lg:mx-[72px] xl:mx-40 mb-5 md:mb-10 space-y-3 md:space-y-0">
             <div className="flex flex-row items-center space-x-2">
-              <h2 className="text-3xl font-extrabold whitespace-pre">
+              <h2 className="text-3xl font-extrabold whitespace-pre-line">
                 {titulo}
               </h2>
               {!notFound && (cidade !== "" || nomeBloco !== "") && (
