@@ -7,6 +7,7 @@ import { useBlocosStore, useSearchStore } from "../store/index";
 import NotFound from "../components/NotFound";
 import Map from "../components/Map";
 import Spinner from "../components/Spinner";
+import Loading from "../components/Loading";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -138,7 +139,7 @@ function Conteudo() {
         </div>
         <Tab.Panels>
           {loading ? (
-            <Spinner />
+            <Loading />
           ) : notFound ? (
             <NotFound button={button} />
           ) : (
@@ -146,13 +147,6 @@ function Conteudo() {
               <Tab.Panel key={index}>{conteudo}</Tab.Panel>
             ))
           )}
-          {/* {notFound ? (
-            <NotFound button={button} />
-          ) : (
-            Object.values(views).map((conteudo, index) => (
-              <Tab.Panel key={index}>{conteudo}</Tab.Panel>
-            ))
-          )} */}
         </Tab.Panels>
       </Tab.Group>
     </div>
