@@ -90,14 +90,14 @@ function Conteudo() {
     <>
       <button
         onClick={resetarBusca}
-        className="w-full bg-red-500 hover:bg-red-500/90 text-white font-bold py-2 px-4 rounded focus:outline-none transition duration-200 text-xl"
+        className="w-full uppercase bg-red-500 hover:bg-red-500/90 text-white font-bold py-2 px-4 rounded focus:outline-none transition duration-200 text-sm"
         type="button"
       >
         Ver blocos recomendados
       </button>
       <button
         onClick={buscarOutro}
-        className="w-full bg-purple-500 hover:bg-purple-500/90 text-white font-bold py-2 px-4 rounded focus:outline-none transition duration-200 text-xl"
+        className="w-full uppercase bg-purple-500 hover:bg-purple-500/90 text-white font-bold py-2 px-4 rounded focus:outline-none transition duration-200 text-sm"
         type="button"
       >
         Procurar outro bloco
