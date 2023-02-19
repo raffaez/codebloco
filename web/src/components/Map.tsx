@@ -8,6 +8,7 @@ import {
 } from "@react-google-maps/api";
 import React, { useState } from "react";
 import { Bloco } from "../models/Bloco";
+import Spinner from "./Spinner";
 
 const containerStyle = {
   with: "100%",
@@ -23,7 +24,7 @@ function Map({ blocos }: Props) {
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
   });
 
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return <Spinner />;
 
   return <MapContainer blocos={blocos} />;
 }
