@@ -54,7 +54,7 @@ function MapContainer({ blocos }: MapContainerProps) {
     >
       {blocos.map((bloco) => (
         <MarkerF
-          key={bloco.id}
+          key={bloco._id}
           position={{ lat: bloco.position.lat, lng: bloco.position.lng }}
           onClick={() => handleMarkerClick(bloco)}
         ></MarkerF>
