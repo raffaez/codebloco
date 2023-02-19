@@ -8,6 +8,7 @@ import NotFound from "../components/NotFound";
 import Map from "../components/Map";
 import Spinner from "../components/Spinner";
 import Loading from "../components/Loading";
+import { XMarkIcon } from "@heroicons/react/20/solid";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -115,7 +116,15 @@ function Conteudo() {
       <Tab.Group>
         <div className="max-w-screen overflow-x-hidden relative flex flex-col space-y-reverse space-y-10 pt-16">
           <div className="flex justify-between items-center mx-3 lg:mx-[72px] xl:mx-40 mb-10">
-            <h2 className="text-2xl md:text-3xl font-extrabold">{titulo}</h2>
+            <div className="flex flex-row items-center space-x-2">
+              <h2 className="text-2xl md:text-3xl font-extrabold">{titulo}</h2>
+              {!notFound && (cidade !== "" || nomeBloco !== "") && (
+                <XMarkIcon
+                  className="h-6 w-6 leading-9 rounded-full bg-red-500 text-white active:animate-spin cursor-pointer hover:bg-red-500/90"
+                  onClick={resetarBusca}
+                />
+              )}
+            </div>
             <div className="w-36 md:w-48">
               <Tab.List className="flex space-x-1 rounded-md border border-gray-200 p-2">
                 {Object.keys(views).map((view) => (
