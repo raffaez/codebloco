@@ -1,6 +1,6 @@
 import React from "react";
 import { Bloco } from "../models/Bloco";
-import { MapPinIcon } from "@heroicons/react/20/solid";
+import { CalendarIcon, MapPinIcon } from "@heroicons/react/20/solid";
 
 type Props = {
   bloco: Bloco;
@@ -17,11 +17,19 @@ function BlocoCard({ bloco }: Props) {
       <div className="px-5 h-full flex flex-col justify-center space-y-2">
         <h3 className="text-lg font-bold text-black-500">{bloco.nome}</h3>
         <p className="text-md text-black-500/75">{bloco.descricao}</p>
-        <div className="flex items-center space-x-2">
-          <MapPinIcon className="h-5 w-5 text-red-500" />
-          <span className="text-base text-black-500/75">
-            {bloco.cidade} - {bloco.estado}
-          </span>
+        <div className="flex items-center justify-between">
+          <div className="flex flex-row space-x-1.5">
+            <MapPinIcon className="h-5 w-5 text-red-500" />
+            <span className="text-base text-black-500/75">
+              {bloco.cidade} - {bloco.estado}
+            </span>
+          </div>
+          <div className="flex flex-row space-x-1.5">
+            <CalendarIcon className="h-5 w-5 text-red-500" />
+            <span className="text-base text-black-500/75">
+              {bloco.data} às {bloco.horario}
+            </span>
+          </div>
         </div>
       </div>
     </div>
