@@ -5,6 +5,7 @@ import { blocos } from "../components/blocosContent";
 import BlocosLista from "../components/BlocosLista";
 import { Bloco } from "../models/Bloco";
 import { useSearchStore } from "../store/index";
+import NotFound from "../components/NotFound";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -27,94 +28,57 @@ function Conteudo() {
   });
 
   const [titulo, setTitulo] = useState("Blocos recomendados");
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
+    let filteredBlocks = blocos;
+
+    if (nomeBloco !== "") {
+      filteredBlocks = filteredBlocks.filter((bloco) =>
+        bloco.nome.toLowerCase().trim().includes(nomeBloco.toLowerCase().trim())
+      );
+    }
+
+    if (cidade !== "") {
+      filteredBlocks = filteredBlocks.filter(
+        (bloco) => bloco.cidade === cidade
+      );
+    }
+
     if (blocosFiltrados && blocosFiltrados.length > 0) {
-      setBlocosFiltrados(undefined);
+      if (filteredBlocks.length > 0) {
+        setBlocosFiltrados(
+          blocosFiltrados.filter((bloco) => filteredBlocks.includes(bloco))
+        );
+      } else {
+        setBlocosFiltrados(undefined);
+      }
+    } else {
+      setBlocosFiltrados(filteredBlocks);
     }
 
-    if (nomeBloco !== "" && cidade !== "") {
-      tituloQuery = { ...tituloQuery, nomeBloco: nomeBloco, cidade: cidade };
-      if (blocosFiltrados !== undefined && blocosFiltrados.length > 0) {
-        setBlocosFiltrados(
-          blocosFiltrados.filter((bloco) => {
-            return (
-              bloco.nome
-                .toLowerCase()
-                .trim()
-                .includes(nomeBloco.toLowerCase().trim()) &&
-              bloco.cidade === cidade
-            );
-          })
-        );
-      } else {
-        setBlocosFiltrados(
-          blocos.filter((bloco) => {
-            return (
-              bloco.nome
-                .toLowerCase()
-                .trim()
-                .includes(nomeBloco.toLowerCase().trim()) &&
-              bloco.cidade === cidade
-            );
-          })
-        );
-      }
-    } else if (nomeBloco !== "") {
-      tituloQuery = { ...tituloQuery, nomeBloco: nomeBloco };
-      if (blocosFiltrados !== undefined && blocosFiltrados.length > 0) {
-        setBlocosFiltrados(
-          blocosFiltrados.filter((bloco) => {
-            return bloco.nome
-              .toLowerCase()
-              .trim()
-              .includes(nomeBloco.toLowerCase().trim());
-          })
-        );
-      } else {
-        setBlocosFiltrados(
-          blocos.filter((bloco) => {
-            return bloco.nome
-              .toLowerCase()
-              .trim()
-              .includes(nomeBloco.toLowerCase().trim());
-          })
-        );
-      }
-    } else if (cidade !== "") {
-      tituloQuery = { ...tituloQuery, cidade: cidade };
-      if (blocosFiltrados && blocosFiltrados.length > 0) {
-        setBlocosFiltrados(
-          blocosFiltrados.filter((bloco) => {
-            return bloco.cidade === cidade;
-          })
-        );
-      } else {
-        setBlocosFiltrados(
-          blocos.filter((bloco) => {
-            return bloco.cidade === cidade;
-          })
-        );
-      }
-    }
-
+    const nomeBlocoText = nomeBloco !== "" ? nomeBloco : "";
+    const cidadeText = cidade !== "" ? ` em ${cidade}` : "";
     setTitulo(
-      tituloQuery.nomeBloco !== "" && tituloQuery.cidade !== ""
-        ? `Busca: ${tituloQuery.nomeBloco} em ${tituloQuery.cidade}`
-        : tituloQuery.nomeBloco !== "" && tituloQuery.cidade === ""
-        ? `Busca: ${tituloQuery.nomeBloco}`
-        : tituloQuery.nomeBloco === "" && tituloQuery.cidade !== ""
-        ? `Busca: em ${tituloQuery.cidade}`
+      nomeBlocoText !== "" && cidadeText !== ""
+        ? `Busca: ${nomeBlocoText} em ${cidadeText}`
+        : nomeBlocoText !== "" && cidadeText === ""
+        ? `Busca: ${nomeBlocoText}`
+        : nomeBlocoText === "" && cidadeText !== ""
+        ? `Busca: em ${cidadeText}`
         : "Blocos recomendados"
     );
-  }, [cidade, nomeBloco, blocosFiltrados]);
-
-  useEffect(() => {}, [nomeBloco, blocosFiltrados]);
+    setNotFound(filteredBlocks.length === 0);
+  }, [cidade, nomeBloco, blocos, blocosFiltrados]);
 
   useEffect(() => {
     if (blocosFiltrados !== undefined) {
       setViews({
         Lista: <BlocosLista blocos={blocosFiltrados} />,
+      });
+    } else {
+      setViews({
+        Lista: <BlocosLista blocos={listaBlocos} />,
       });
     }
   }, [blocosFiltrados]);
