@@ -115,9 +115,11 @@ function Conteudo() {
     <div className="min-h-screen w-screen mb-5">
       <Tab.Group>
         <div className="max-w-screen overflow-x-hidden relative flex flex-col space-y-reverse space-y-10 pt-16">
-          <div className="flex justify-between items-center mx-3 lg:mx-[72px] xl:mx-40 mb-10">
+          <div className="flex flex-col md:flex-row justify-between items-center mx-3 lg:mx-[72px] xl:mx-40 mb-5 md:mb-10 space-y-3 md:space-y-0">
             <div className="flex flex-row items-center space-x-2">
-              <h2 className="text-2xl md:text-3xl font-extrabold">{titulo}</h2>
+              <h2 className="text-3xl font-extrabold whitespace-pre">
+                {titulo}
+              </h2>
               {!notFound && (cidade !== "" || nomeBloco !== "") && (
                 <XMarkIcon
                   className="h-6 w-6 leading-9 rounded-full bg-red-500 text-white active:animate-spin cursor-pointer hover:bg-red-500/90"
@@ -125,7 +127,7 @@ function Conteudo() {
                 />
               )}
             </div>
-            <div className="w-36 md:w-48">
+            <div className="w-full md:w-48">
               <Tab.List className="flex space-x-1 rounded-md border border-gray-200 p-2">
                 {Object.keys(views).map((view) => (
                   <Tab
