@@ -133,10 +133,13 @@ function Conteudo() {
           </div>
         </div>
         <Tab.Panels>
-          {Object.values(views).map((conteudo, index) => (
-            <Tab.Panel key={index}>{conteudo}</Tab.Panel>
-          ))}
-          {notFound && <NotFound button={button} />}
+          {notFound ? (
+            <NotFound button={button} />
+          ) : (
+            Object.values(views).map((conteudo, index) => (
+              <Tab.Panel key={index}>{conteudo}</Tab.Panel>
+            ))
+          )}
         </Tab.Panels>
       </Tab.Group>
     </div>

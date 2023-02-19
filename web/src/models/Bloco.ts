@@ -5,4 +5,8 @@ export interface Bloco {
   imagem: string;
   cidade: string;
   estado: string;
+  position: {
+    lat: number;
+    lng: number;
+  };
 }
