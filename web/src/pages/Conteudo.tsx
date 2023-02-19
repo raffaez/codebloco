@@ -6,6 +6,7 @@ import BlocosLista from "../components/BlocosLista";
 import { Bloco } from "../models/Bloco";
 import { useSearchStore } from "../store/index";
 import NotFound from "../components/NotFound";
+import Map from "../components/Map";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -16,15 +17,11 @@ function Conteudo() {
   const nomeBloco = useSearchStore((state) => state.nomeBloco);
 
   const [listaBlocos, setListaBlocos] = useState<Bloco[]>(blocos);
-  const [blocosFiltrados, setBlocosFiltrados] = useState<Bloco[]>();
-
-  let tituloQuery = {
-    nomeBloco: "",
-    cidade: "",
-  };
+  const [blocosFiltrados, setBlocosFiltrados] = useState<Bloco[]>([]);
 
   const [views, setViews] = useState({
     Lista: <BlocosLista blocos={listaBlocos} />,
+    Mapa: <Map blocos={listaBlocos} />,
   });
 
   const [titulo, setTitulo] = useState("Blocos recomendados");
@@ -45,20 +42,14 @@ function Conteudo() {
       );
     }
 
-    if (blocosFiltrados && blocosFiltrados.length > 0) {
-      if (filteredBlocks.length > 0) {
-        setBlocosFiltrados(
-          blocosFiltrados.filter((bloco) => filteredBlocks.includes(bloco))
-        );
-      } else {
-        setBlocosFiltrados(undefined);
-      }
-    } else {
+    if (filteredBlocks.length > 0) {
       setBlocosFiltrados(filteredBlocks);
+    } else {
+      setBlocosFiltrados([]);
     }
 
     const nomeBlocoText = nomeBloco !== "" ? nomeBloco : "";
-    const cidadeText = cidade !== "" ? ` em ${cidade}` : "";
+    const cidadeText = cidade !== "" ? cidade : "";
     setTitulo(
       nomeBlocoText !== "" && cidadeText !== ""
         ? `Busca: ${nomeBlocoText} em ${cidadeText}`
@@ -69,23 +60,25 @@ function Conteudo() {
         : "Blocos recomendados"
     );
     setNotFound(filteredBlocks.length === 0);
-  }, [cidade, nomeBloco, blocos, blocosFiltrados]);
+  }, [cidade, nomeBloco]);
 
   useEffect(() => {
     if (blocosFiltrados !== undefined) {
       setViews({
         Lista: <BlocosLista blocos={blocosFiltrados} />,
+        Mapa: <Map blocos={blocosFiltrados} />,
       });
     } else {
       setViews({
         Lista: <BlocosLista blocos={listaBlocos} />,
+        Mapa: <Map blocos={listaBlocos} />,
       });
     }
-  }, [blocosFiltrados]);
+  }, [blocosFiltrados, listaBlocos]);
 
   const resetarBusca = () => {
     useSearchStore.setState({ nomeBloco: "", cidade: "" });
-    setBlocosFiltrados(undefined);
+    setBlocosFiltrados([]);
     setNotFound(false);
   };
 
