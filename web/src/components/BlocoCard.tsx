@@ -9,11 +9,13 @@ type Props = {
 function BlocoCard({ bloco }: Props) {
   return (
     <div className="w-96 h-80 rounded-lg flex flex-col border border-gray-200">
-      <img
-        src={bloco.imagem}
-        className="h-40 object-cover object-center rounded-t-lg"
-        alt=""
-      />
+      <div className="h-40 bg-purple-500 rounded-t-lg">
+        <img
+          src={bloco.imagem}
+          className="h-40 w-full object-cover object-center rounded-t-lg opacity-80"
+          alt=""
+        />
+      </div>
       <div className="px-5 h-full flex flex-col justify-center space-y-2">
         <h3 className="text-lg font-bold text-black-500">{bloco.nome}</h3>
         <p className="text-md text-black-500/75">{bloco.descricao}</p>
