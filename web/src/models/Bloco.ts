@@ -1,5 +1,5 @@
 export interface Bloco {
-  id: number;
+  _id: string;
   nome: string;
   descricao: string;
   imagem: string;
