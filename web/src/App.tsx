@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className="max-w-screen overflow-x-hidden scroll-smooth text-black-500">
-      <div className="w-screen h-screen flex flex-col">
+      <div className="w-screen h-screen flex flex-col scrollbar-thin scrollbar-track-black-500/20 scrollbar-thumb-red-500">
         <section id="hero" className="relative z-20">
           <Hero />
         </section>
