@@ -108,7 +108,7 @@ function Conteudo() {
   return (
     <div className="h-screen w-screen">
       <Tab.Group>
-        <div className="max-w-screen overflow-x-hidden relative flex flex-col space-y-reverse space-y-10 pt-20">
+        <div className="max-w-screen overflow-x-hidden relative flex flex-col space-y-reverse space-y-10 pt-16">
           <div className="flex justify-between items-center mx-3 lg:mx-[72px] xl:mx-40 mb-10">
             <h2 className="text-2xl md:text-3xl font-extrabold">{titulo}</h2>
             <div className="w-36 md:w-48">
