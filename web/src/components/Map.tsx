@@ -47,7 +47,11 @@ function MapContainer({ blocos }: MapContainerProps) {
   };
 
   return (
-    <GoogleMap zoom={12} center={center} mapContainerClassName="w-full h-96">
+    <GoogleMap
+      zoom={12}
+      center={center}
+      mapContainerClassName="w-full h-[420px]"
+    >
       {blocos.map((bloco) => (
         <MarkerF
           key={bloco.id}
