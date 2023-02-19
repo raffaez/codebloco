@@ -1,6 +1,7 @@
 import React from "react";
 import { Bloco } from "../models/Bloco";
 import { CalendarIcon, MapPinIcon } from "@heroicons/react/20/solid";
+import { urlFor } from "../lib/sanity";
 
 type Props = {
   bloco: Bloco;
@@ -11,7 +12,7 @@ function BlocoCard({ bloco }: Props) {
     <div className="w-96 h-80 rounded-lg flex flex-col border border-gray-200">
       <div className="h-40 bg-purple-500 rounded-t-lg">
         <img
-          src={bloco.imagem}
+          src={urlFor(bloco.imagem).url()}
           className="h-40 w-full object-cover object-center rounded-t-lg opacity-80"
           alt=""
         />

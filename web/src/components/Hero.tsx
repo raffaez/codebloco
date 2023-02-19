@@ -8,10 +8,11 @@ import {
 import { useFormik } from "formik";
 import React, { ChangeEvent, Fragment, useEffect, useState } from "react";
 
-import { useSearchStore } from "../store";
-import { blocos } from "./blocosContent";
+import { useBlocosStore, useSearchStore } from "../store";
 
 function Hero() {
+  const { blocos } = useBlocosStore();
+
   const formik = useFormik({
     initialValues: {
       cidade: "",
