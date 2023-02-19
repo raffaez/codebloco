@@ -83,6 +83,35 @@ function Conteudo() {
     }
   }, [blocosFiltrados]);
 
+  const resetarBusca = () => {
+    useSearchStore.setState({ nomeBloco: "", cidade: "" });
+    setBlocosFiltrados(undefined);
+    setNotFound(false);
+  };
+
+  const buscarOutro = () => {
+    window.location.href = "/#hero";
+  };
+
+  const button = (
+    <>
+      <button
+        onClick={resetarBusca}
+        className="w-full bg-red-500 hover:bg-red-500/90 text-white font-bold py-2 px-4 rounded focus:outline-none transition duration-200 text-xl"
+        type="button"
+      >
+        Ver blocos recomendados
+      </button>
+      <button
+        onClick={buscarOutro}
+        className="w-full bg-purple-500 hover:bg-purple-500/90 text-white font-bold py-2 px-4 rounded focus:outline-none transition duration-200 text-xl"
+        type="button"
+      >
+        Procurar outro bloco
+      </button>
+    </>
+  );
+
   return (
     <div className="h-screen w-screen">
       <Tab.Group>
@@ -114,6 +143,7 @@ function Conteudo() {
           {Object.values(views).map((conteudo, index) => (
             <Tab.Panel key={index}>{conteudo}</Tab.Panel>
           ))}
+          {notFound && <NotFound button={button} />}
         </Tab.Panels>
       </Tab.Group>
     </div>
