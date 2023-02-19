@@ -8,7 +8,9 @@ export const blocos = [{
   position: {
     lat: -23.565784,
     lng: -46.666739
-  }
+  },
+  data: '19/02',
+  horario: '17h15'
 }, {
   id: 2,
   nome: 'Todo mundo null',
@@ -19,7 +21,9 @@ export const blocos = [{
   position: {
     lat: -27.5969,
     lng: -48.5495
-  }
+  },
+  data: '20/02',
+  horario: '14h45'
 }, {
   id: 3,
   nome: 'Hoje dou exception',
@@ -30,7 +34,9 @@ export const blocos = [{
   position: {
     lat: -25.4195,
     lng: -49.2646
-  }
+  },
+  data: '21/02',
+  horario: '20h'
 }, {
   id: 4,
   nome: 'Manda node',
@@ -41,7 +47,9 @@ export const blocos = [{
   position: {
     lat: -12.9711,
     lng: -38.5108
-  }
+  },
+  data: '21/02',
+  horario: '18h30'
 }, {
   id: 5,
   nome: 'Só no back-end',
@@ -52,7 +60,9 @@ export const blocos = [{
   position: {
     lat: -23.592913,
     lng: -46.662452
-  }
+  },
+  data: '22/02',
+  horario: '18h45'
 }, {
   id: 6,
   nome: 'Esse anel não é de Ruby',
@@ -63,7 +73,9 @@ export const blocos = [{
   position: {
     lat: -23.569713,
     lng: -46.601005
-  }
+  },
+  data: '23/02',
+  horario: '15h15'
 }, {
   id: 7,
   nome: 'Pimenta no C# dos outros é refresco',
@@ -74,7 +86,9 @@ export const blocos = [{
   position: {
     lat: -22.9068,
     lng: -43.1729
-  }
+  },
+  data: '22/02',
+  horario: '19h30'
 }, {
   id: 8,
   nome: 'EnCACHE aqui',
@@ -85,7 +99,9 @@ export const blocos = [{
   position: {
     lat: -30.0346,
     lng: -51.2177
-  }
+  },
+  data: '23/02',
+  horario: '16h15'
 }, {
   id: 9,
   nome: 'Não valho nada mas JAVA li',
@@ -96,5 +112,7 @@ export const blocos = [{
   position: {
     lat: -23.616483,
     lng: -46.721653
-  }
+  },
+  data: '23/02',
+  horario: '22h'
 }];

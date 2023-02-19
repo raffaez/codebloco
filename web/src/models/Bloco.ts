@@ -9,4 +9,6 @@ export interface Bloco {
     lat: number;
     lng: number;
   };
+  data: string;
+  horario: string;
 }
