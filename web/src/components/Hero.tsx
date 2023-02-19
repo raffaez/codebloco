@@ -46,7 +46,13 @@ function Hero() {
   return (
     <div className="w-full overflow-x-hidden h-screen bg-gray-100 relative flex flex-col items-center justify-center space-y-10 space-y-reverse ">
       <div>
-        {" "}
+        <a href="https://github.com/raffaez/codebloco" target="_blank">
+          <img
+            src="/src/assets/icons8-github-64.png"
+            alt="Github"
+            className="absolute w-9 h-9 z-50 right-5 top-5 opacity-60 saturate-50 hover:opacity-100 hover:saturate-100 hover:drop-shadow-md transition duration-300 ease-in-out cursor-pointer"
+          />
+        </a>{" "}
         <div className="w-64 h-64 lg:w-[407px] lg:h-[345px] absolute top-0 left-0 bg-top-ilustra bg-no-repeat bg-contain bg-left-top z-0"></div>
         <div className="w-64 h-64 lg:w-[414px] md:h-[330px] absolute bottom-0 right-0 bg-bottom-ilustra bg-no-repeat bg-contain bg-right-bottom z-0"></div>
       </div>
