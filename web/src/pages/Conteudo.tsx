@@ -26,6 +26,18 @@ function Conteudo() {
   const [titulo, setTitulo] = useState("Blocos recomendados");
   const [notFound, setNotFound] = useState(false);
 
+  const getTitulo = (nomeBlocoText: string, cidadeText: string) => {
+    setTitulo(
+      nomeBlocoText !== "" && cidadeText !== ""
+        ? `Busca: ${nomeBlocoText} em ${cidadeText}`
+        : nomeBlocoText !== "" && cidadeText === ""
+        ? `Busca: ${nomeBlocoText}`
+        : nomeBlocoText === "" && cidadeText !== ""
+        ? `Busca: em ${cidadeText}`
+        : "Blocos recomendados"
+    );
+  };
+
   useEffect(() => {
     let filteredBlocks = blocos;
 
@@ -50,17 +62,7 @@ function Conteudo() {
       setBlocosFiltrados([]);
     }
 
-    const nomeBlocoText = nomeBloco !== "" ? nomeBloco : "";
-    const cidadeText = cidade !== "" ? cidade : "";
-    setTitulo(
-      nomeBlocoText !== "" && cidadeText !== ""
-        ? `Busca: ${nomeBlocoText} em ${cidadeText}`
-        : nomeBlocoText !== "" && cidadeText === ""
-        ? `Busca: ${nomeBlocoText}`
-        : nomeBlocoText === "" && cidadeText !== ""
-        ? `Busca: em ${cidadeText}`
-        : "Blocos recomendados"
-    );
+    getTitulo(nomeBloco, cidade);
     setNotFound(filteredBlocks.length === 0);
   }, [cidade, nomeBloco]);
 
