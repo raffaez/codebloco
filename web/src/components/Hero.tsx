@@ -49,7 +49,7 @@ function Hero() {
       <div>
         <a href="https://github.com/raffaez/codebloco" target="_blank">
           <img
-            src="/src/assets/icons8-github-64.png"
+            src="https://i.imgur.com/2BgjQiA.png"
             alt="Github"
             className="absolute w-9 h-9 z-50 right-5 top-5 opacity-60 saturate-50 hover:opacity-100 hover:saturate-100 hover:drop-shadow-md transition duration-300 ease-in-out cursor-pointer"
           />
