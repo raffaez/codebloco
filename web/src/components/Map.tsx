@@ -8,6 +8,7 @@ import React, { useState } from "react";
 
 import { Bloco } from "../models/Bloco";
 import Spinner from "./Spinner";
+import { urlFor } from "../lib/sanity";
 
 const containerStyle = {
   with: "100%",
@@ -78,7 +79,7 @@ function MarkerInfoWindow({ bloco }: MarkerInfoWindowProps) {
   return (
     <div className="flex flex-row items-center space-x-2 p-1">
       <img
-        src={bloco.imagem}
+        src={urlFor(bloco.imagem).url()}
         alt={bloco.nome}
         width={36}
         height={36}
