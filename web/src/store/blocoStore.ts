@@ -17,7 +17,8 @@ export const useBlocosStore = create<BlocoStore>((set) => ({
     set({ loading: true });
     try {
       const response = await fetchBlocos();
-      set({ blocos: response, loading: false });
+      const responseOrdenado = response.sort((a, b) => a.data.localeCompare(b.data));
+      set({ blocos: responseOrdenado, loading: false });
     } catch (error) {
       console.error('Error fetching blocos: ', error);
       set({ loading: false });
