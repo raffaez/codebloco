@@ -71,6 +71,7 @@ function Conteudo() {
   };
 
   const buscarOutro = () => {
+    resetarBusca();
     window.location.href = "/#hero";
   };
 
@@ -105,7 +106,7 @@ function Conteudo() {
               {!notFound && (cidade !== "" || nomeBloco !== "") && (
                 <XMarkIcon
                   className="h-6 w-6 leading-9 rounded-full bg-red-500 text-white active:animate-spin cursor-pointer hover:bg-red-500/90"
-                  onClick={resetarBusca}
+                  onClick={buscarOutro}
                 />
               )}
             </div>
