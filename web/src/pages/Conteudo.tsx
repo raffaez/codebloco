@@ -1,14 +1,12 @@
 import { Tab } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/20/solid";
 import React, { useEffect, useState } from "react";
 
 import BlocosLista from "../components/BlocosLista";
-import { Bloco } from "../models/Bloco";
-import { useBlocosStore, useSearchStore } from "../store/index";
-import NotFound from "../components/NotFound";
-import Map from "../components/Map";
-import Spinner from "../components/Spinner";
 import Loading from "../components/Loading";
-import { XMarkIcon } from "@heroicons/react/20/solid";
+import Map from "../components/Map";
+import NotFound from "../components/NotFound";
+import { useBlocosStore, useSearchStore } from "../store";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -19,12 +17,10 @@ function Conteudo() {
   const cidade = useSearchStore((state) => state.cidade);
   const nomeBloco = useSearchStore((state) => state.nomeBloco);
 
-  const [blocosFiltrados, setBlocosFiltrados] = useState<Bloco[]>([]);
-
-  const [views, setViews] = useState({
-    Lista: <BlocosLista blocos={blocos} />,
-    Mapa: <Map blocos={blocos} />,
-  });
+  const views = {
+    Lista: <BlocosLista />,
+    Mapa: <Map />,
+  };
 
   const [titulo, setTitulo] = useState("Blocos recomendados");
   const [notFound, setNotFound] = useState(false);
@@ -61,30 +57,16 @@ function Conteudo() {
 
     setNotFound(filteredBlocks.length === 0);
     if (filteredBlocks.length > 0) {
-      setBlocosFiltrados(filteredBlocks);
+      useBlocosStore.setState({ blocosFiltrados: filteredBlocks });
     } else {
-      setBlocosFiltrados([]);
+      useBlocosStore.setState({ blocosFiltrados: [] });
     }
     getTitulo(nomeBloco, cidade);
   }, [cidade, nomeBloco, loading]);
 
-  useEffect(() => {
-    if (blocosFiltrados.length > 0) {
-      setViews({
-        Lista: <BlocosLista blocos={blocosFiltrados} />,
-        Mapa: <Map blocos={blocosFiltrados} />,
-      });
-    } else {
-      setViews({
-        Lista: <BlocosLista blocos={blocos} />,
-        Mapa: <Map blocos={blocos} />,
-      });
-    }
-  }, [blocosFiltrados, blocos]);
-
   const resetarBusca = () => {
     useSearchStore.setState({ nomeBloco: "", cidade: "" });
-    setBlocosFiltrados([]);
+    useBlocosStore.setState({ blocosFiltrados: [] });
     setNotFound(false);
   };
 

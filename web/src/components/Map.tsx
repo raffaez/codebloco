@@ -6,27 +6,22 @@ import {
 } from "@react-google-maps/api";
 import React, { useState } from "react";
 
-import { Bloco } from "../models/Bloco";
-import Spinner from "./Spinner";
 import { urlFor } from "../lib/sanity";
+import { Bloco } from "../models/Bloco";
+import { useBlocosStore } from "../store";
+import Spinner from "./Spinner";
 
-const containerStyle = {
-  with: "100%",
-  height: "450px",
-};
-
-interface Props {
-  blocos: Bloco[];
-}
-
-function Map({ blocos }: Props) {
+function Map() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
   });
+  const { blocos, blocosFiltrados } = useBlocosStore();
 
   if (!isLoaded) return <Spinner />;
 
-  return <MapContainer blocos={blocos} />;
+  const blocosMap = blocosFiltrados.length > 0 ? blocosFiltrados : blocos;
+
+  return <MapContainer blocos={blocosMap} />;
 }
 
 interface MapContainerProps {

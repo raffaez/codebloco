@@ -4,12 +4,14 @@ import { fetchBlocos } from '../service/fetchBlocos';
 
 interface BlocoStore {
   blocos: Bloco[];
+  blocosFiltrados: Bloco[];
   loading: boolean;
   fetchBlocos: () => Promise<void>;
 }
 
 export const useBlocosStore = create<BlocoStore>((set) => ({
   blocos: [],
+  blocosFiltrados: [],
   loading: false,
   fetchBlocos: async () => {
     set({ loading: true });
