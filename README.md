@@ -67,5 +67,5 @@ Você pode visualizar o layout do projeto no [Figma](http://figma.com/) através
 
 ## 🚀 Deploy
 
-[Vercel](codebloco.vercel.app)
+[Vercel](https://codebloco.vercel.app/)
 ---
