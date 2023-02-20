@@ -14,9 +14,6 @@ function BlocosLista() {
               <BlocoCard bloco={bloco} key={bloco._id} />
             ))
           : blocos.map((bloco) => <BlocoCard bloco={bloco} key={bloco._id} />)}
-        {/* {blocos.map((bloco) => (
-          <BlocoCard bloco={bloco} key={bloco._id} />
-        ))} */}
       </div>
     </div>
   );
