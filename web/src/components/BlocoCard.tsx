@@ -63,22 +63,25 @@ function BlocoCard({ bloco }: Props) {
         leaveTo="opacity-0 translate-x-1"
       >
         <Popover.Panel className="absolute bottom-[105px] right-[15px] z-50">
-          <div className="h-10 w-32 bg-white rounded-md flex flex-row items-center justify-end space-x-2">
+          <div className="h-10 w-fit bg-white rounded-md flex flex-row items-center justify-end space-x-2">
             <SocialIcon
               url={wppUrl}
               network="whatsapp"
               style={{ height: 28, width: 28 }}
               target="_blank"
+              className=" drop-shadow-md"
             />
             <SocialIcon
               url={ttUrl}
               style={{ height: 28, width: 28 }}
               target="_blank"
+              className=" drop-shadow-md"
             />
             <SocialIcon
               url={fbUrl}
               style={{ height: 28, width: 28 }}
               target="_blank"
+              className=" drop-shadow-md"
             />
           </div>
         </Popover.Panel>

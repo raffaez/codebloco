@@ -109,7 +109,7 @@ function Hero() {
                 value={formik.values.nomeBloco}
                 onChange={formik.handleChange}
                 placeholder="Pesquise por nome"
-                className={`bg-transparent focus:outline-none ${
+                className={`bg-transparent focus:outline-none w-full ${
                   formik.errors.nomeBloco && "error-placeholder"
                 }`}
               />
