@@ -36,7 +36,7 @@
 
 Aplicação para encontrar blocos de carnaval. Desafio #7 do [#BoraCodar](https://www.rocketseat.com.br/boracodar) da [Rocketseat](https://rocketseat.com.br/).
 
-## ✨ Tecnologias
+## 🔧 Tecnologias
 
 - [TypeScript](https://www.typescriptlang.org/)
 - [Vite](https://vitejs.dev/)
@@ -50,7 +50,7 @@ Aplicação para encontrar blocos de carnaval. Desafio #7 do [#BoraCodar](https:
 - [Yup](https://github.com/jquense/yup)
 - [Sanity](https://www.sanity.io/)
 
-## 🚀 Como executar
+## ✨ Como executar
 
 - Clone o repositório com `git clone https://github.com/raffaez/codebloco`
 - Instale os pacotes com `yarn`
@@ -65,4 +65,7 @@ Você pode visualizar o layout do projeto no [Figma](http://figma.com/) através
 
 - [Layout](https://www.figma.com/community/file/1207675804423978995)
 
+## 🚀 Deploy
+
+[Vercel](codebloco.vercel.app)
 ---
