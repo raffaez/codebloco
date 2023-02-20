@@ -47,6 +47,7 @@ Aplicação para encontrar blocos de carnaval. Desafio #7 do [#BoraCodar](https:
 - [Axios](https://axios-http.com/)
 - [React Google Maps Api](https://react-google-maps-api-docs.netlify.app/)
 - [Formik](https://formik.org/)
+- [Yup](https://github.com/jquense/yup)
 - [Sanity](https://www.sanity.io/)
 
 ## 🚀 Como executar
