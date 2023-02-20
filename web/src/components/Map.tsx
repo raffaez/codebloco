@@ -29,6 +29,9 @@ interface MapContainerProps {
 }
 
 function MapContainer({ blocos }: MapContainerProps) {
+  const cidadesSet = new Set(blocos.map((bloco) => bloco.cidade));
+
+  const zoom = cidadesSet.size > 1 ? 4 : 12;
   const center = blocos[0].position;
 
   const [ativo, setAtivo] = useState<Bloco | null>(null);
@@ -43,7 +46,7 @@ function MapContainer({ blocos }: MapContainerProps) {
 
   return (
     <GoogleMap
-      zoom={12}
+      zoom={zoom}
       center={center}
       mapContainerClassName="w-full h-[420px]"
     >
