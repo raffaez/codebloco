@@ -48,3 +48,13 @@
     opacity: 0;
   }
 }
+
+@layer components {
+  .error {
+    @apply border-b-2 border-red-500 bg-red-500/5 animate-shake;
+  }
+
+  .error-placeholder {
+    @apply placeholder-red-500/80;
+  }
+}

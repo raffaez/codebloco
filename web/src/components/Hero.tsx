@@ -9,6 +9,30 @@ import { useFormik } from "formik";
 import React, { ChangeEvent, Fragment, useEffect, useState } from "react";
 
 import { useBlocosStore, useSearchStore } from "../store";
+import * as yup from "yup";
+
+const validationSchema = yup.object({
+  cidade: yup
+    .string()
+    .test(
+      "pelo menos um campo",
+      "Preencha pelo menos um campo",
+      (value, context) => {
+        const { nomeBloco } = context.parent;
+        return value || nomeBloco;
+      }
+    ),
+  nomeBloco: yup
+    .string()
+    .test(
+      "pelo menos um campo",
+      "Preencha pelo menos um campo",
+      (value, context) => {
+        const { cidade } = context.parent;
+        return value || cidade;
+      }
+    ),
+});
 
 function Hero() {
   const { blocos } = useBlocosStore();
@@ -18,18 +42,17 @@ function Hero() {
       cidade: "",
       nomeBloco: "",
     },
+    validationSchema,
     onSubmit: (values) => {
-      if (values.cidade !== "" || values.nomeBloco !== "") {
-        useSearchStore.setState({
-          cidade: values.cidade,
-          nomeBloco: values.nomeBloco,
-        });
-        window.location.href = "/#conteudo";
-        formik.handleReset({
-          cidade: "",
-          nomeBloco: "",
-        });
-      }
+      useSearchStore.setState({
+        cidade: values.cidade,
+        nomeBloco: values.nomeBloco,
+      });
+      window.location.href = "/#conteudo";
+      formik.handleReset({
+        cidade: "",
+        nomeBloco: "",
+      });
     },
   });
 
@@ -67,10 +90,16 @@ function Hero() {
         </strong>
       </div>
 
-      <div className="w-80 md:w-96 lg:w-[993px] h-fit lg:h-32 rounded-md bg-white drop-shadow-sm z-50 flex justify-center">
+      <div className="w-80 md:w-96 lg:w-[993px] h- lg:h-32 rounded-md bg-white drop-shadow-sm z-50 flex justify-center">
         <form onSubmit={formik.handleSubmit}>
           <div className="flex h-full flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-5 p-5 items-center">
-            <div className="w-72 md:w-[348px] h-12 flex items-center justify-start space-x-2 px-2 rounded-md bg-gray-100 hover:bg-gray-200/60 transition duration-200 ease-in-out text-black-500">
+            <div
+              className={`w-72 md:w-[348px] h-12 flex items-center justify-start space-x-2 px-2 rounded-md transition duration-200 ease-in-out text-black-500 ${
+                formik.errors.nomeBloco
+                  ? "error"
+                  : "bg-gray-100 hover:bg-gray-200/60"
+              }`}
+            >
               <div>
                 <MagnifyingGlassIcon className="w-5 h-5 text-red-500" />
               </div>
@@ -80,14 +109,21 @@ function Hero() {
                 value={formik.values.nomeBloco}
                 onChange={formik.handleChange}
                 placeholder="Pesquise por nome"
-                className="bg-transparent focus:outline-none"
+                className={`bg-transparent focus:outline-none ${
+                  formik.errors.nomeBloco && "error-placeholder"
+                }`}
               />
             </div>
-
-            <div className="w-72 md:w-[348px] h-12 flex items-center rounded-md bg-gray-100 hover:bg-gray-200/60 transition duration-200 ease-in-out">
+            <div
+              className={`w-72 md:w-[348px] h-12 flex items-center rounded-md transition duration-200 ease-in-out ${
+                formik.errors.cidade
+                  ? "error"
+                  : "bg-gray-100 hover:bg-gray-200/60"
+              }`}
+            >
               <Combobox
                 as="span"
-                className="w-full relative"
+                className="w-full relative "
                 onChange={(cidade: any) => {
                   formik.setFieldValue("cidade", cidade);
                 }}
@@ -99,12 +135,16 @@ function Hero() {
                     <Combobox.Input
                       onChange={(e) => setQuery(e.target.value)}
                       placeholder="Selecione uma cidade"
-                      className="bg-inherit focus:outline-none"
+                      className={`bg-inherit focus:outline-none ${
+                        formik.errors.nomeBloco && "error-placeholder"
+                      }`}
                     />
                   </div>
                   <Combobox.Button>
                     <ChevronDownIcon
-                      className="h-6 w-6 text-gray-400"
+                      className={`h-6 w-6 text-gray-400 ${
+                        formik.errors.cidade && "text-red-500"
+                      }`}
                       aria-hidden
                     />
                   </Combobox.Button>
@@ -163,7 +203,11 @@ function Hero() {
                 </Transition>
               </Combobox>
             </div>
-
+            {formik.errors.nomeBloco && formik.errors.cidade && (
+              <div className="text-red-500 font-medium lg:font-semibold lg:tracking-wide text-sm mr-auto lg:absolute bottom-3 right-60">
+                {formik.errors.nomeBloco}
+              </div>
+            )}
             <input
               type="submit"
               value="Buscar agora"
