@@ -41,7 +41,7 @@ Aplicação para encontrar blocos de carnaval. Desafio #7 do [#BoraCodar](https:
 - [TypeScript](https://www.typescriptlang.org/)
 - [Vite](https://vitejs.dev/)
 - [React](https://reactjs.org/)
-- [TailindCSS](https://tailwindcss.com/)
+- [TailwindCSS](https://tailwindcss.com/)
 - [HeadlessUI](https://headlessui.com/)
 - [Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction)
 - [Axios](https://axios-http.com/)
